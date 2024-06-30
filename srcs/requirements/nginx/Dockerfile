@@ -5,7 +5,6 @@ RUN apt update && apt upgrade -y
 RUN apt install nginx -y
 
 #Install openssl
-
 RUN apt install openssl -y
 
 # Create an RSA Private Key and CSR

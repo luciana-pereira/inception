@@ -42,8 +42,7 @@ if [ ! -f "/var/www/wordpress/wp-config.php" ]; then
     wp config set WP_CACHE_KEY_SALT $REDIS_KEY_SALT --allow-root
     wp config set WP_REDIS_CLIENT $REDIS_CLIENT     --allow-root
 
-    # Update all plugins and enable Redis
-    #wp plugin update --all --allow-root
+    # Enable Redis
     wp redis enable --allow-root
 fi
 
