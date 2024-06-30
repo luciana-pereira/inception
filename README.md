@@ -12,7 +12,7 @@
   * [1.4 Docker x VMs](#14-docker-x-vms)
 * [2. Etapas do Projeto](#2-etapas-do-projeto)
   * [2.1. Etapa 1: Makefile e docker-compose.yml](#21-etapa-1-makefile-e-docker-composeyml)
-    * [2.1.1 network: host, links ou --link](#211-network:-host,-links-ou---link)
+    * [2.1.1 network host links ou link](#211-network-host-links-ou-link)
     * [2.1.2 network no docker-compose.yml](#212-network-no-docker-compose.yml)
     * [2.1.3 Requisitos do docker-compose.yml](#213-requisitos-do-docker-compose.yml)
     * [2.1.4 Não aplicaveis no mandatorio](#214-não-aplicaveis-no-mandatorio)
