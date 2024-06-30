@@ -24,8 +24,8 @@
     * [2.4.1 Arquivos de configuração do NGINX](241-arquivos-de-configuração-do-nginx)
     * [2.4.2 Acessando o NGINX pela porta 443](242-acessando-o-nginx-pela-porta-443)
   * [2.5. Etapa 5: Configuração do Wordpress](#25-etapa-5-configuração-do-wordpress)
-  * [2.5. Etapa Bônus](#25-etapa-bônus)
-    * [2.5.1. Configuração do Cache Redis](#251-configuração-do-cache-redis)
+  * [2.6. Etapa Bônus](#26-etapa-bônus)
+    * [2.6.1. Configuração do Cache Redis](#261-configuração-do-cache-redis)
 * [3. Comandos Proibidos](#3-comandos-proibidos)
 * [4. Banco de Dados WordPress](#4-banco-de-dados-wordpress)
 * [5. Volumes](#5-volumes)
@@ -143,7 +143,7 @@ Usar tail -f ou um loop infinito (sleep infinity, while true) como entrypoint _*
 ### 2.2.2 Gerenciamento de Processos e PID 1
 O PID 1 é o primeiro processo que é iniciado dentro de um contêiner Docker. Este processo é responsável por gerenciar outros processos dentro do contêiner. Se o processo com PID 1 termina, o contêiner inteiro termina. Portanto, é crucial que o PID 1 seja um processo bem-comportado que gerencie corretamente os sinais do sistema e os processos filho. O Docker depende do comportamento adequado dos processos PID 1 para enviar sinais e parar os contêineres de forma limpa. Se o processo não responder corretamente aos sinais, pode causar interrupções e comportamento inesperado.
 
-### 2.3. Etapa 3: Configuração do MariaDB
+### 2.3 Etapa 3: Configuração do MariaDB
 Para configurar o banco precisamos criar o Dockerfile para criar a imagem e o arquivo de configuração _**my.conf**_ que ficará dentro da pasta conf.
 
 - **conf/my.conf**:
@@ -266,18 +266,23 @@ curl: (60) SSL certificate problem: self signed certificate
 More details here: https://curl.haxx.se/docs/sslcerts.html
 
 ```
-### 2.5. Etapa 5: Configuração do Wordpress
+### 2.5 Etapa 5: Configuração do Wordpress
 
 **Testes no Wordpress:**
-Login no Wordpress
+Login no Wordpress:
 ```bash
+https://lucperei.42.fr/wp-login.php
+```
 
-``
+Acesso a area administrativa do Wordpress:
+```bash
+https://lucperei.42.fr/wp-admin
+```
 
-### 2.5. Etapa Bônus
+### 2.6 Etapa Bônus
 Os requisitos do projeto envolvem a configuração de serviços como:
 
-### 2.5.1 Configuração do Cache Redis
+### 2.6.1 Configuração do Cache Redis
 O **Cache Redis** é um sistema de armazenamento em memória de código aberto que pode ser usado como um cache de alto desempenho para acelerar o acesso a dados frequentemente acessados. No contexto do Site WordPress, ele é utilizado como um cache para melhorar a velocidade e o desempenho do site.
 
 Ele armazena em pares de chaves e valores. As chaves podem representar consultas de banco de dados, resultados de consultas, objetos de cache, etc. Os valores correspondentes são os dados associados a essas chaves.
@@ -320,7 +325,7 @@ wp_redis_keywp:userlogins:wp_user
 "wp_redis_keywp:comment:1
 ```
 
-### 2.5.2 Configuração do Servidor FTP
+### 2.6.2 Configuração do Servidor FTP
 O servidor FTP, permite a transferência de arquivos de maneira segura e eficiente.
 
 O servidor FTP utilizado é o vsftpd (Very Secure FTP Daemon), conhecido por sua simplicidade e segurança.
@@ -353,17 +358,17 @@ ls -la /var/www/wordpress
 ls -la /var/www/wordpress/wp-content/uploads/2024/06 # Onde as imagens foram carregadas
 ```
 
-### 2.5.3 Configuração do Site estático
+### 2.6.3 Configuração do Site estático
 O site estático criado e um pequeno blog desenvolvido e estilizado em markdown utilizando algumas ferramentas como o hugo-theme-m10c para estilização do site.
 
 ![Pagina Sobre mim](https://github.com/luciana-pereira/inception/assets/37550557/c946ad4b-7063-4072-8e1f-73c787355af7)
 
-### 2.5.4 Configuração do Adminer
+### 2.6.4 Configuração do Adminer
 O Adminer é uma ferramenta de gerenciamento de banco de dados de código aberto, escrita em PHP. Ele oferece uma interface web única para interagir com múltiplos sistemas de banco de dados, como MySQL, PostgreSQL, SQLite, Microsoft SQL Server e outros. O Adminer é uma alternativa mais leve e eficiente ao phpMyAdmin.
 
 ![Tela do Adminer](https://github.com/luciana-pereira/inception/assets/37550557/40dd2436-216a-433b-9f4f-7f20780e6a4a)
 
-### 2.5.5 Configuração do cAdvisor
+### 2.6.5 Configuração do cAdvisor
 
 Acesse a interface web do cAdvisor através da URL:
 ```bash
