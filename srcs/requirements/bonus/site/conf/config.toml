@@ -1,0 +1,34 @@
+#baseURL = "https://lucperei.42.fr/static"
+title = "Luciana Pereira"
+theme = "m10c"
+paginate = 8
+canonifyURLs = true
+
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    identifier = "about"
+    name = "About"
+    url = "/about"
+    weight = 2
+
+[params]
+  author = "Luciana Pereira"
+  description = "Student@42SP"
+  menu_item_separator = " - "
+  [[params.social]]
+    icon = "github"
+    name = "Github"
+    url = "https://github.com/luciana-pereira"
+
+# Green theme
+[params.style]
+  darkestColor = "#41175e"
+  darkColor = "#0d0415"
+  lightColor = "#fff"
+  lightestColor = "#fff"
+  primaryColor = "#dad865"

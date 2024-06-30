@@ -1,0 +1,162 @@
+version: '3.8'
+
+services:
+
+  redis:
+    build:
+      context: ./requirements/bonus/redis
+      dockerfile: Dockerfile
+    container_name: redis
+    image: redis
+    depends_on:
+      - wordpress
+    networks:
+      - inception
+    restart: always
+    ports:
+     - '6379:6379'
+    env_file:
+      - .env
+    volumes:
+      - "wordpress-volume:/var/www/wordpress"
+
+  mariadb:
+    build:
+      context: ./requirements/mariadb
+      dockerfile: Dockerfile
+    container_name: mariadb
+    image: mariadb
+    environment:
+      MARIADB_ROOT_HOST: ${MARIADB_ROOT_HOST}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD} 
+      MARIADB_DATABASE: ${MARIADB_DATABASE} 
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+    volumes:
+      - "mariadb-volume:/var/lib/mysql"
+    networks:
+      - inception
+    restart: always
+
+  nginx:
+    build:
+      context: ./requirements/nginx
+      dockerfile: Dockerfile
+    container_name: nginx
+    image: nginx
+    ports:
+      - "443:443"
+    depends_on:
+      - wordpress
+      - cadvisor
+    volumes:
+      - "wordpress-volume:/var/www/wordpress"
+    networks:
+      - inception
+    restart: always
+
+  wordpress:
+    build:
+      context: ./requirements/wordpress
+      dockerfile: Dockerfile
+    container_name: wordpress
+    image: wordpress
+    environment:
+      MARIADB_ROOT_HOST: ${MARIADB_ROOT_HOST}
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+      DOMAIN_NAME: ${DOMAIN_NAME}
+      WP_TITLE: ${WP_TITLE}
+      WP_ADMIN_USR: ${WP_ADMIN_USR}
+      WP_ADMIN_PWD: ${WP_ADMIN_PWD}
+      WP_ADMIN_EMAIL: ${WP_ADMIN_EMAIL}
+      WP_USR: ${WP_USR}
+      WP_PWD: ${WP_PWD}
+      WP_EMAIL: ${WP_EMAIL}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_CLIENT: ${REDIS_CLIENT}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      REDIS_KEY_SALT: ${REDIS_KEY_SALT}
+    depends_on:
+      - mariadb
+    volumes:
+      - "wordpress-volume:/var/www/wordpress"
+    networks:
+      - inception
+    restart: always
+
+  ftp-server:
+    build:
+      context: ./requirements/bonus/ftp_server
+    container_name: ftp
+    image: ftp
+    networks:
+      - inception
+    restart: always
+    ports:
+      - "21:21"
+      - "21100-21111:21100-21111"
+    volumes:
+      - "wordpress-volume:/var/www/wordpress"
+    environment:
+      FTP_USR: ${FTP_USR}
+      FTP_PWD: ${FTP_PWD}
+
+  site:
+    build: ./requirements/bonus/site
+    container_name: site
+    image: site
+    restart: always
+    networks:
+      - inception
+
+  adminer:
+    build: ./requirements/bonus/adminer
+    container_name: adminer
+    image: adminer
+    restart: always
+    depends_on:
+      - mariadb
+    expose:
+     - "9000"
+    networks:
+      - inception
+
+  cadvisor:
+    build: ./requirements/bonus/cadvisor
+    container_name: cadvisor
+    image: cadvisor
+    ports:
+       - "8080:8080"
+    networks:
+     - inception
+    volumes:
+      - /:/rootfs
+      - /var/run:/var/run
+      - /sys:/sys
+      - /var/lib/docker/:/var/lib/docker
+    restart: always
+
+volumes:
+  mariadb-volume:
+    name: mariadb
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: ${DB_HOST_VOLUME_PATH}
+
+  wordpress-volume:
+    name: wordpress
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: ${WP_HOST_VOLUME_PATH}
+
+networks:
+  inception:
+    driver: bridge
+    name: inception
