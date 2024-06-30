@@ -485,11 +485,16 @@ docker-compose up --build
 ### 12. Documentação de Referência
 Para mais informações, consulte a documentação oficial das ferramentas e tecnologias utilizadas:
 
+- [42 The Network-Inception](https://medium.com/@afatir.ahmedfatir/unveiling-42-the-network-inception-a-dive-into-docker-and-docker-compose-cfda98d9f4ac)
 - [Docker Documentation](https://docs.docker.com/)
 - [NGINX Documentation](https://nginx.org/en/docs/)
+- [Proxy NGINX](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_redirect)
+- [Diretivas NGINX](https://medium.com/@valdeirpsr/s%C3%A9rie-nginx-3-conhe%C3%A7a-as-diretivas-do-nginx-1abebd4b3da)
 - [MariaDB Documentation](https://mariadb.com/kb/en/documentation/)
 - [WordPress Documentation](https://wordpress.org/support/article/wordpress-documentation/)
+- [Criação de usuario](https://developer.wordpress.org/cli/commands/user/create/)
 - [vsftpd Documentation](https://security.appspot.com/vsftpd.html)
+- [Cadvisor](https://github.com/google/cadvisor)
 
 ### 13. Desenvolvedora
 :octocat:
