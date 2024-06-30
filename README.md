@@ -365,7 +365,26 @@ O Adminer é uma ferramenta de gerenciamento de banco de dados de código aberto
 
 ### 2.5.5 Configuração do cAdvisor
 
-![Tela do cAdvisor](https://github.com/luciana-pereira/inception/assets/37550557/877ef86d-9850-4e78-a4fb-5e380eb3a2b3)
+Acesse a interface web do cAdvisor através da URL:
+```bash
+https://lucperei.42.fr/cadvisor/containers/
+```
+
+Acessar Métricas do Docker (dos Subcontainers):
+```bash
+https://lucperei.42.fr/cadvisor/containers/docker
+```
+
+Esta página exibe um painel com informações e gráficos sobre os contêineres em execução.
+
+**Principais Seções da Interface Web do cAdvisor**
+- **Dashboard**: A visão geral mostra métricas agregadas para todos os contêineres.
+- **Containers**: A visualização detalhada dos contêineres individuais, com gráficos e estatísticas.
+- **Graph**: Gráficos interativos mostrando o histórico de uso de recursos.
+- **Stats**: Estatísticas detalhadas sobre CPU, memória, disco e rede para contêineres.
+- **API**: Acessa a API RESTful para integrar métricas com outras ferramentas ou scripts personalizados.
+
+![Tela do cAdvisor](https://github.com/luciana-pereira/inception/assets/37550557/9304d292-d206-4ee3-9ab4-deb61f5c0829)
 
 ### 3. Comandos Proibidos
 - Para atender aos requisitos do projeto, certos comandos e práticas são proibidos, a fim de garantir uma implementação limpa e eficiente.
