@@ -355,6 +355,7 @@ ftp lucperei.42.fr # Conectar com o nome do host
 ```bash
 docker exec -it ftp /bin/sh
 ls -la /var/www/wordpress
+chmod 0777 /var/www/wordpress/wp-content/uploads && clear &&
 ls -la /var/www/wordpress/wp-content/uploads/2024/06 # Onde as imagens foram carregadas
 ```
 
